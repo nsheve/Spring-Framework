@@ -3,19 +3,15 @@ package ru.sheve.springcours.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-<<<<<<< HEAD
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.sheve.springcours.dao.PersonDAO;
 import ru.sheve.springcours.models.Person;
 
 import javax.validation.Valid;
-=======
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import ru.sheve.springcours.dao.PersonDAO;
->>>>>>> main
 
 @Controller
 @RequestMapping("/people")
@@ -41,7 +37,6 @@ public class PeopleController {
         model.addAttribute("person", personDAO.show(id));
         return "people/show";
     }
-<<<<<<< HEAD
 
     @GetMapping("/new")
     public String newPerson(@ModelAttribute("person") Person person) {
@@ -78,6 +73,4 @@ public class PeopleController {
         personDAO.delete(id);
         return "redirect:/people";
     }
-=======
->>>>>>> main
 }
