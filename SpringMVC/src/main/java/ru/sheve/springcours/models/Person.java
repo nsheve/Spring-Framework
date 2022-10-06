@@ -1,6 +1,5 @@
 package ru.sheve.springcours.models;
 
-<<<<<<< HEAD
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
@@ -25,49 +24,37 @@ public class Person {
         this.name = name;
         this.age = age;
         this.email = email;
-=======
-public class Person {
-    private int id;
-    private String name;
-
-    public Person(int id, String name) {
-        this.id = id;
-        this.name = name;
->>>>>>> main
     }
 
-    public int getId() {
+    public int getId () {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId ( int id){
         this.id = id;
     }
 
-    public String getName() {
+    public String getName () {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName (String name){
         this.name = name;
     }
-<<<<<<< HEAD
 
-    public int getAge() {
+    public int getAge () {
         return age;
     }
 
-    public void setAge(int age) {
+    public void setAge ( int age){
         this.age = age;
     }
 
-    public String getEmail() {
+    public String getEmail () {
         return email;
     }
 
-    public void setEmail(String email) {
+    public void setEmail (String email){
         this.email = email;
     }
-=======
->>>>>>> main
 }
