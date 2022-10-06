@@ -14,10 +14,17 @@ public class PersonDAO {
     {
         people = new ArrayList<>();
 
+<<<<<<< HEAD
+        people.add(new Person(++PEOPLE_COUNT, "Nikita", 21, "nsheve@inbox.ru"));
+        people.add(new Person(++PEOPLE_COUNT, "Dima", 22, "dima@mail.ru"));
+        people.add(new Person(++PEOPLE_COUNT, "Sveta", 28, "28sveta@mail.ru"));
+        people.add(new Person(++PEOPLE_COUNT, "Anna", 31, "an2006@inbox.ru"));
+=======
         people.add(new Person(++PEOPLE_COUNT, "Nikita"));
         people.add(new Person(++PEOPLE_COUNT, "Dima"));
         people.add(new Person(++PEOPLE_COUNT, "Sveta"));
         people.add(new Person(++PEOPLE_COUNT, "Anna"));
+>>>>>>> main
     }
 
     public List<Person> index() {
@@ -27,4 +34,23 @@ public class PersonDAO {
     public Person show(int id) {
         return people.stream().filter(person -> person.getId() == id).findAny().orElse(null);
     }
+<<<<<<< HEAD
+
+    public void save(Person person) {
+        person.setId(++PEOPLE_COUNT);
+        people.add(person);
+    }
+
+    public void update(int id, Person updatePerson) {
+        Person person = show(id);
+        person.setName(updatePerson.getName());
+        person.setAge(updatePerson.getAge());
+        person.setEmail(updatePerson.getEmail());
+    }
+
+    public void delete(int id) {
+        people.remove(show(id));
+    }
+=======
+>>>>>>> main
 }
