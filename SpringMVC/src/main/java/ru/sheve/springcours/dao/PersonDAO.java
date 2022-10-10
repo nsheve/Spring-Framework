@@ -1,6 +1,7 @@
 package ru.sheve.springcours.dao;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
@@ -43,5 +44,54 @@ public class PersonDAO {
 
     public void delete(int id) {
         jdbcTemplate.update("DELETE FROM person WHERE id=?", id);
+    }
+
+    public void testMultipleUpdate() {
+        List<Person> personList = create1000People();
+
+        long before = System.currentTimeMillis();
+
+        for (Person person : personList) {
+            jdbcTemplate.update("INSERT INTO person VALUES (?, ?, ?, ?)",
+                    person.getId(), person.getName(), person.getAge(), person.getEmail());
+        }
+
+        long after = System.currentTimeMillis();
+
+        System.out.println("Time: " + (after - before));
+    }
+
+    private List<Person> create1000People() {
+        List<Person> people = new ArrayList<>();
+        for (int i = 0; i < 1000; i++) {
+            people.add(new Person(i, "Name" + i, 30, "test" + i + "@mail.ru"));
+        }
+        return people;
+    }
+
+    public void testBatchUpdate() {
+        List<Person> personList = create1000People();
+
+        long before = System.currentTimeMillis();
+
+        jdbcTemplate.batchUpdate("INSERT INTO person VALUES (?, ?, ?, ?)",
+                new BatchPreparedStatementSetter() {
+                    @Override
+                    public void setValues(PreparedStatement ps, int i) throws SQLException {
+                        ps.setInt(1, personList.get(i).getId());
+                        ps.setString(2, personList.get(i).getName());
+                        ps.setInt(3, personList.get(i).getAge());
+                        ps.setString(4, personList.get(i).getEmail());
+                    }
+
+                    @Override
+                    public int getBatchSize() {
+                        return personList.size();
+                    }
+                });
+
+        long after = System.currentTimeMillis();
+
+        System.out.println("Time: " + (after - before));
     }
 }
